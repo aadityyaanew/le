@@ -4,70 +4,83 @@ import { useState } from "react";
 import { testimonials } from "@/data/testimonials";
 import { SectionHeader } from "@/components/shared/section-header";
 import { AnimatedElement } from "@/components/shared/animated-element";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 
 export function Testimonials() {
-  const [current, setCurrent] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const next = () => setCurrent((c) => (c + 1) % testimonials.length);
-  const prev = () =>
-    setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
+  const prev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
 
-  const testimonial = testimonials[current];
+  const next = () => {
+    setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
+
+  const current = testimonials[currentIndex];
 
   return (
-    <section className="py-24 lg:py-32 bg-secondary/30" id="testimonials">
+    <section className="py-24 lg:py-36 border-t border-border/50 relative overflow-hidden">
+      {/* Editorial backdrop watermark */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none opacity-[0.02] text-[18rem] font-serif italic">
+        TRUST
+      </div>
+
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeader
-          label="Client Feedback"
+          label="Validation"
           title={
             <>
-              What our clients{" "}
-              <span className="font-serif italic">say</span>
+              What our partners say about{" "}
+              <span className="font-serif italic">velocity</span> & craft
             </>
           }
+          description="Direct feedback from founders and tech executives who trusted Le to architect and scale their primary digital assets."
         />
 
-        <AnimatedElement animation="fade-up">
-          <div className="max-w-4xl">
-            <Quote className="w-10 h-10 text-foreground/10 mb-8" />
+        <div className="max-w-4xl mx-auto mt-12">
+          <AnimatedElement animation="fade-up">
+            <div className="relative p-8 md:p-14 lg:p-16 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-md shadow-2xl">
+              <Quote className="w-12 h-12 text-foreground/10 mb-8" />
 
-            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-light leading-snug mb-10 transition-all duration-500">
-              &ldquo;{testimonial.quote}&rdquo;
-            </blockquote>
+              <blockquote className="text-2xl sm:text-3xl md:text-4xl font-light leading-relaxed tracking-tight mb-12 text-foreground font-serif italic">
+                &ldquo;{current.quote}&rdquo;
+              </blockquote>
 
-            <div className="flex items-center justify-between">
-              <div>
-                <cite className="not-italic">
-                  <p className="text-base font-medium">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {testimonial.role}, {testimonial.company}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-8 border-t border-border/40">
+                <div>
+                  <h4 className="text-lg font-medium text-foreground">
+                    {current.name}
+                  </h4>
+                  <p className="text-sm font-mono text-muted-foreground mt-0.5">
+                    {current.role} · {current.company}
                   </p>
-                </cite>
-              </div>
+                </div>
 
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={prev}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors"
-                  aria-label="Previous testimonial"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={next}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors"
-                  aria-label="Next testimonial"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-                <span className="text-sm text-muted-foreground ml-3">
-                  {current + 1} / {testimonials.length}
-                </span>
+                {/* Interactive slide controllers */}
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-mono text-muted-foreground mr-2">
+                    0{currentIndex + 1} / 0{testimonials.length}
+                  </span>
+                  <button
+                    onClick={prev}
+                    aria-label="Previous quote"
+                    className="w-11 h-11 rounded-full border border-border/70 flex items-center justify-center hover:bg-foreground hover:text-background transition-all active:scale-95"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={next}
+                    aria-label="Next quote"
+                    className="w-11 h-11 rounded-full border border-border/70 flex items-center justify-center hover:bg-foreground hover:text-background transition-all active:scale-95"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </AnimatedElement>
+          </AnimatedElement>
+        </div>
       </div>
     </section>
   );

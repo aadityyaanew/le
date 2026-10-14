@@ -20,13 +20,13 @@ export function SectionHeader({
     >
       {label && (
         <AnimatedElement animation="fade-up">
-          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
-            {label}
+          <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground mb-4">
+            // {label}
           </p>
         </AnimatedElement>
       )}
       <AnimatedElement animation="fade-up" delay={100}>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-light leading-[1.15] tracking-tight text-balance">
+        <h2 className="text-3xl md:text-5xl font-bold leading-[1.05] tracking-[-0.035em] text-balance">
           {title}
         </h2>
       </AnimatedElement>

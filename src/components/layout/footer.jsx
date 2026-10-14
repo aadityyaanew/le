@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { SITE_CONFIG, NAV_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 import { Separator } from "@/components/ui/separator";
@@ -21,6 +22,12 @@ const footerSocials = [
 ];
 
 export function Footer() {
+  const [year, setYear] = useState(2026);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="bg-foreground text-background" role="contentinfo">
       {/* CTA banner */}
@@ -155,7 +162,7 @@ export function Footer() {
             className="w-5 h-5 object-contain invert"
           />
           <p className="text-xs text-background/40">
-            © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights
+            © {year} {SITE_CONFIG.name}. All rights
             reserved.
           </p>
         </div>

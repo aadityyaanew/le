@@ -11,7 +11,7 @@ export function AnimatedElement({
   as: Component = "div",
   ...props
 }) {
-  const [ref, isVisible] = useIntersection();
+  const [ref, isVisible] = useIntersection({ threshold: 0.08 });
 
   const animationClass = {
     "fade-up": "animate-fade-up",
@@ -21,15 +21,15 @@ export function AnimatedElement({
     "scale-in": "animate-scale-in",
   }[animation];
 
-  const delayClass = delay
-    ? `animation-delay-${delay}`
-    : "";
+  const delayClass = delay ? `animation-delay-${delay}` : "";
 
   return (
     <Component
       ref={ref}
       className={cn(
-        "opacity-0",
+        "transition-all duration-700 will-change-transform",
+        !isVisible && "opacity-0 translate-y-6",
+        isVisible && "opacity-100 translate-y-0",
         isVisible && animationClass,
         isVisible && delayClass,
         className

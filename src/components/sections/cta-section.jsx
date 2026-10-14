@@ -28,7 +28,7 @@ export function CtaSection({
           </AnimatedElement>
 
           <AnimatedElement animation="fade-up" delay={100}>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight leading-tight text-white mb-6">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.035em] leading-[1.08] text-white mb-6">
               {title}
             </h2>
           </AnimatedElement>
@@ -55,16 +55,15 @@ export function CtaSection({
               {showBooking && (
                 <Button
                   asChild
-                  variant="outline"
                   size="lg"
-                  className="rounded-full px-8 border-zinc-700 text-white hover:bg-zinc-900 transition-all font-medium h-12"
+                  className="rounded-full px-8 border border-white/20 bg-transparent text-white hover:bg-white/10 hover:border-white/40 transition-all font-medium h-12"
                 >
                   <Link
                     href={SITE_CONFIG.bookingUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Calendar className="w-4 h-4 mr-2 text-zinc-400" />
+                    <Calendar className="w-4 h-4 mr-2 text-zinc-300" />
                     Book a Discovery Call
                   </Link>
                 </Button>

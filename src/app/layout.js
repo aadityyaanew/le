@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { ScrollProgressBar } from "@/components/shared/scroll-progress-bar";
+import { CustomCursor } from "@/components/shared/custom-cursor";
 import { SITE_CONFIG } from "@/lib/constants";
 import {
   generateOrganizationSchema,
@@ -82,7 +84,7 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@500;600;700;800&display=swap"
           rel="stylesheet"
         />
         <script
@@ -101,6 +103,8 @@ export default function RootLayout({ children }) {
         >
           Skip to main content
         </a>
+        <ScrollProgressBar />
+        <CustomCursor />
         <Header />
         <main id="main-content" className="flex-1">
           {children}
